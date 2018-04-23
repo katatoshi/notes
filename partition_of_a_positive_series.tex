@@ -1,0 +1,68 @@
+\documentclass[12pt,a4paper]{jsarticle}
+\usepackage{mymacro}
+
+\newcommand{\nat}{\mathbf{N}}
+\newcommand{\real}{\mathbf{R}}
+\newcommand{\calF}{\mathcal{F}}
+
+\begin{document}
+
+\title{正項級数の和の分割について}
+\author{katatoshi}
+\maketitle
+
+$P \subseteq \nat$に対して，$P$の有限部分集合全体の集合を$\calF(P)$で表わす．$P \subseteq \nat$, $P \not= \varnothing$から$\real$への写像$a\colon P \to \real$を数列と呼び，$(a_n)_{n \in P}$で表わす．$F \in \calF(P)$に対して$s_F = \sum_{n \in F} a_n$とするとき，$\calF(P)$から$\real$への写像$F \mapsto s_F$を級数と呼び，$\sum_{n \in P} a_n$で表わす．$s_F$を級数$\sum_{n \in P} a_n$の部分和と呼び，任意の$n \in \nat$に対して$a_n \geq 0$であるとき，級数$\sum_{n \in P} a_n$を正項級数と呼ぶ．以下，正項級数についてのみ考える．正項級数$\sum_{n \in P} a_n$に対して
+\begin{equation*}
+    \sup_{F \in \calF(P)} s_F
+\end{equation*}
+を正項級数$\sum_{n \in P} a_n$の和と呼び，同じく$\sum_{n \in P} a_n$で表わす．$\sup_{F \in \calF(P)} s_F < +\infty$であるとき正項級数$\sum_{n \in P} a_n$は収束するという．
+
+\begin{proposition}\label{main_prop}
+    $P, P_1, P_2 \subseteq \nat$, $P \not= \varnothing$, $P_1 \not= \varnothing$, $P_2 \not= \varnothing$, $P_1 \cap P_2 = \varnothing$, $P_1 \cup P_2 = P$とする．このとき正項級数$\sum_{n \in P} a_n$が収束するための必要十分条件は$\sum_{n \in P_1} a_n$と$\sum_{n \in P_2} a_n$が共に収束することである．そしてこの条件が成り立つとき
+    \begin{equation*}
+        \sum_{n \in P} a_n = \sum_{n \in P_1} a_n + \sum_{n \in P_2} a_n
+    \end{equation*}
+    である．
+\end{proposition}
+\begin{proof}
+    （必要性）$F_1$を$\calF(P_1)$の任意の元，$F_2$を$\calF(P_2)$の任意の元とする．$F_1 \cup F_2 \in \calF(P)$より$s_{F_1} + s_{F_2} = s_{F_1 \cup F_2} \leq \sup_{F \in \calF(P)} s_F$であるから
+    \begin{equation}
+        \sum_{n \in P_1} a_n + \sum_{n \in P_2} a_n = \sup_{F_1 \in \calF(P_1)} s_{F_1} + \sup_{F_2 \in \calF(P_2)} s_{F_2} \leq \sup_{F \in \calF(P)} s_F = \sum_{n \in P} a_n \label{main_prop:ineq_suff}
+    \end{equation}
+    である．$\sum_{n \in P} a_n$は収束するので$\sum_{n \in P_1} a_n + \sum_{n \in P_2} a_n \leq \sum_{n \in P} a_n < +\infty$である．したがって$\sum_{n \in P_1} a_n$, $\sum_{n \in P_2} a_n$は収束する．
+
+    （十分性）任意の$F \in \calF(P)$は$F = F_1 \cup F_2$, $F_1 \in \calF(P_1)$, $F_2 \in \calF(P_2)$と表わされるので$s_F = s_{F_1} + s_{F_2} \leq \sup_{F_1 \in \calF(P_1)} s_{F_1} + \sup_{F_2 \in \calF(P_2)} s_{F_2}$である．したがって
+    \begin{equation}
+        \sum_{n \in P} a_n = \sup_{F \in \calF(P)} s_F \leq \sup_{F_1 \in \calF(P_1)} s_{F_1} + \sup_{F_2 \in \calF(P_2)} s_{F_2} = \sum_{n \in P_1} a_n + \sum_{n \in P_2} a_n \label{main_prop:ineq_ness}
+    \end{equation}
+    である．$\sum_{n \in P_1} a_n$, $\sum_{n \in P_2} a_n$は収束するので$\sum_{n \in P} a_n \leq \sum_{n \in P_1} a_n + \sum_{n \in P_2} a_n < +\infty$である．したがって$\sum_{n \in P} a_n$は収束する．
+
+    (\ref{main_prop:ineq_suff})，(\ref{main_prop:ineq_ness})より
+    \begin{equation*}
+        \sum_{n \in P} a_n = \sum_{n \in P_1} a_n + \sum_{n \in P_2} a_n
+    \end{equation*}
+    である．
+    \qed
+\end{proof}
+
+\begin{corollary}
+    $P \subseteq \nat$, $P_l \subseteq \nat$, $l = 1, \cdots, L, L \geq 2$, $P \not= \varnothing$, $P_l \not= \varnothing$, $l = 1, \cdots, L$, $P_l \cap P_{l'} = \varnothing$, $l \not= l'$, $P = \bigcup_{l = 1}^L P_l$とする．このとき正項級数$\sum_{n \in P} a_n$が収束するための必要十分条件は任意の$l$, $l = 1, \cdots, L$に対して$\sum_{n \in P_l} a_n$が収束することである．そしてこの条件が成り立つとき
+    \begin{equation*}
+        \sum_{n \in P} a_n = \sum_{l = 1}^L \sum_{n \in P_l} a_n
+    \end{equation*}
+    である．
+\end{corollary}
+\begin{proof}
+    $L$についての数学的帰納法で証明する．$L = 2$ならば命題\ref{main_prop}より主張は正しい．
+
+    $L > 2$とし，$L - 1$に対しては主張は正しいと仮定する．$Q = P_1 \cup \cdots \cup P_{L - 1}$とすると，$Q \not= \varnothing$, $Q \cap P_L = \varnothing$, $Q \cup P_L = P$である．いま，$\sum_{n \in P} a_n$が収束するならば，命題\ref{main_prop}より$\sum_{n \in Q} a_n$と$\sum_{n \in P_L} a_n$は共に収束する．したがって，帰納法の仮定より，任意の$l$, $l = 1, \cdots, L$に対して$\sum_{n \in P_l} a_n$は収束する．逆に，任意の$l$, $l = 1, \cdots, L$に対して$\sum_{n \in P_l} a_n$が収束するならば，帰納法の仮定より，$\sum_{n \in Q} a_n$は収束するので，命題\ref{main_prop}より$\sum_{n \in P} a_n$は収束する．
+
+    命題\ref{main_prop}より$\sum_{n \in P} a_n = \sum_{n \in Q} a_n + \sum_{n \in P_L} a_n$であり，帰納法の仮定より$\sum_{n \in Q} a_n = \sum_{l = 1}^{L - 1} \sum_{n \in P_l} a_n$であるから
+    \begin{equation*}
+        \sum_{n \in P} a_n = \sum_{l = 1}^{L - 1} \sum_{n \in P_l} a_n + \sum_{n \in P_L} a_n = \sum_{l = 1}^L \sum_{n \in P_l} a_n
+    \end{equation*}
+    である．
+    \qed
+\end{proof}
+
+\end{document}
