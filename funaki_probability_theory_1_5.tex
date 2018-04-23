@@ -1,0 +1,58 @@
+\documentclass[12pt,a4paper]{jsarticle}
+\usepackage{mymacro}
+
+\begin{document}
+
+\title{舟木確率論1.5ノート}
+\author{katatoshi}
+\maketitle
+
+$p, q \in [0, 1]$, $p + q = 1$とし，　
+\begin{gather*}
+    \Omega = \{a, b\}^n = \{(\omega_1, \cdots, \omega_n) \mid \omega_i \in \{a, b\}\}, \\
+    \sharp(a; \omega) = \sharp\{k \mid 0 \leq k \leq n, \omega_k = a\}, \\
+    \sharp(b; \omega) = \sharp\{k \mid 0 \leq k \leq n, \omega_k = b\}.
+\end{gather*}
+とする．$A \subseteq \Omega$に対して
+\begin{equation*}
+    P(A) = \sum_{\omega \in A} p^{\sharp(a; \omega)} q^{\sharp(b; \omega)}
+\end{equation*}
+とする．
+
+このとき，$P(\Omega) = 1$である．実際，
+\begin{align*}
+    P(\Omega)
+    &= \sum_{\omega \in \Omega} p^{\sharp(a; \omega)} q^{\sharp(b; \omega)} \\
+    &= \sum_{k = 0}^n \sharp\{\omega \in \Omega \mid \sharp(a; \omega) = k\} p^k q^{(n - k)}
+\end{align*}
+であり，$\sharp(a; \omega) = k$であるような$\omega$の数は$\omega_1, \cdots, \omega_n$の中から$k$個選ぶ選び方の数だから$\displaystyle \binom{n}{k}$である．したがって，二項定理より，
+\begin{align*}
+    P(\Omega)
+    &= \sum_{k = 0}^n \binom{n}{k} p^k q^{n - k} \\
+    &= (p + q)^n \\
+    &= 1
+\end{align*}
+である．
+
+他の例として$A_1 = \{\omega \in \Omega \mid \omega_1 = a\}$とすれば，
+\begin{align*}
+    P(A_1)
+    &= \sum_{\omega \in A_1} p^{\sharp(a; \omega)} q^{\sharp(b; \omega)} \\
+    &= \sum_{k = 0}^n \sharp\{\omega \in \Omega \mid \omega_1 = a, \sharp(a; \omega) = k\} p^k q^{n - k} \\
+    &= \sum_{k = 1}^n \sharp\{\omega \in \Omega \mid \omega_1 = a, \sharp(a; \omega) = k\} p^k q^{n - k} \\
+    &= \sum_{k = 0}^{n - 1} \sharp\{\omega \in \Omega \mid \omega_1 = a, \sharp(a; \omega) = k + 1\} p^{k + 1} q^{n - (k + 1)} \\
+    &= p \sum_{k = 0}^{n - 1} \sharp\{\omega \in \Omega \mid \omega_1 = a, \sharp(a; \omega) = k + 1\} p^k q^{(n - 1) - k} \\
+    &= p \sum_{k = 0}^{n - 1} \binom{n - 1}{k} p^k q^{(n - 1) - k} \\
+    &= p(p + q)^{n - 1} \\
+    &= p
+\end{align*}
+である．
+
+\begin{thebibliography}{99}
+\bibitem{舟木}
+    舟木直久
+    『確率論』
+    朝倉書店, 2004.
+\end{thebibliography}
+
+\end{document}
