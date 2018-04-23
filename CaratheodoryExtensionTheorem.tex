@@ -1,0 +1,177 @@
+\documentclass[12pt,a4paper]{jsarticle}
+\usepackage{mymacro}
+
+\begin{document}
+
+\title{Carath\'{e}doryの拡張定理}
+\author{katatoshi}
+\maketitle
+
+集合$X$の部分集合族$\mathcal{G}$上で定義された関数$\mu: \mathcal{G} \to [0, \infty]$が\emph{前測度}（pre-measure）であるとは以下の性質をみたすことである．
+\begin{enumerate}
+    \item $\varnothing \in \mathcal{G}$ならば$\mu(\varnothing) = 0$
+    \item $\mathcal{G}$の元の列$(G_i)_{i = 1}^\infty$が互いに素，すなわち$i \not= j$ならば$G_i \cap G_j = \varnothing$，であり$\bigcup_{i = 1}^\infty G_i \in \mathcal{G}$ならば$\mu\left(\bigcup_{i = 1}^\infty G_i\right) = \sum_{i = 1}^\infty \mu(G_i)$
+\end{enumerate}
+$\sigma$-加法族上の前測度は測度に他ならない．
+
+集合$X$の部分集合族$\mathcal{S}$は以下の性質をみたすとき（$X$上の）\emph{集合の半環}（semi-ring of sets）\footnote{半加法族と呼んでいるテキストもある．しかしsemi-ringをそのように呼んでしまうと次に述べるringを加法族と呼びたくなりalgebraと呼ばれる集合族と紛らわしい（$\sigma$-algebraを$\sigma$-加法族と呼ぶのと同じようにalgebraを加法族と呼びたくなる）．そこでこの文章ではsemi-ringを集合の半環と呼びringを集合の環と呼ぶことにした．なお，ring $\mathcal{R}$は$X \in \mathcal{R}$であるときalgebraと呼ばれる．ringは必ずしも$X$を含まないためringとalgebraは異なる概念である．}と呼ばれる．
+\begin{enumerate}
+    \item $\varnothing \in \mathcal{S}$
+    \item $S, T \in \mathcal{S}$ならば$S \cap T \in \mathcal{S}$
+    \item $S, T \in \mathcal{S}$ならば有限個の互いに素な$\mathcal{S}$の元$S_1, S_2, \cdots, S_n$が存在して$S \setminus T = \bigcup_{i = 1}^n S_i$
+\end{enumerate}
+
+集合$X$の部分集合族$\mathcal{R}$は以下の性質をみたすとき（$X$上の）\emph{集合の環}（ring of sets）と呼ばれる．
+\begin{enumerate}
+    \item $\varnothing \in \mathcal{R}$
+    \item $S, T \in \mathcal{R}$ならば$S \cup T \in \mathcal{R}$
+    \item $S, T \in \mathcal{R}$ならば$S \setminus T \in \mathcal{R}$
+\end{enumerate}
+
+集合の環$\mathcal{R}$の元$S, T$について$S \cap T = S \setminus (S \setminus T) \in \mathcal{R}$が成り立つので，集合の環は共通部分についても閉じている．集合の環は集合の半環であり，$\sigma$-加法族は集合の環である．
+
+$\mathfrak{R}$をすべての元が集合$X$上の集合の環であるような集合族とする．するとその共通部分$\bigcap \mathfrak{R} = \{S \mid \forall \mathcal{R} \in \mathfrak{R}(S \in \mathcal{R})\}$は再び集合$X$上の集合の環となる．
+
+実際，任意の$\mathcal{R} \in \mathfrak{R}$について$\varnothing \in \mathcal{R}$であるから$\varnothing \in \bigcap \mathfrak{R}$となり(1)をみたす．次に，$S, T \in \bigcap \mathfrak{R}$ならば，任意の$\mathcal{R} \in \mathfrak{R}$について$S, T \in \mathcal{R}$であるから，任意の$\mathcal{R} \in \mathfrak{R}$について$S \cup T \in \mathcal{R}$である．よって，$S \cup T \in \bigcap \mathfrak{R}$となり(2)をみたす．(3)をみたすことは(2)と同様にして確認できる．
+
+集合$X$の部分集合族$\mathcal{G}$に対して，$\mathcal{G}$を包むような$X$上の集合の環の全体の集合族を$\mathfrak{R}$とすると，$\bigcap \mathfrak{R}$は$\mathcal{G} \subseteq \bigcap \mathfrak{R}$をみたす集合$X$上の集合の環であり，任意の$\mathcal{R} \in \mathfrak{R}$について$\bigcap \mathfrak{R} \subseteq \mathcal{R}$である．すなわち，$\bigcap \mathfrak{R}$は$\mathcal{G}$を包むような$X$上の集合の環の中で最小のものであり，これを$\mathcal{G}$によって\emph{生成された}集合の環と呼び，ここでは$\rho(\mathcal{G})$で表すことにする．
+
+\begin{proposition}
+    $\mathcal{S}$を集合$X$上の集合の半環とすると
+    \begin{equation*}
+        \rho(\mathcal{S}) = \{S_1 \cup \cdots \cup S_n \mid n \in \bm{N}, S_1, \cdots, S_n \in \mathcal{S}\text{は互いに素}\}
+    \end{equation*}
+\end{proposition}
+\begin{proof}
+    右辺の集合を$\mathcal{U}$とおく．$\mathcal{S} \subseteq \mathcal{U} \subseteq \rho(\mathcal{S})$であるから，$\mathcal{U}$が集合の環であることを示せば，$\rho(\mathcal{S})$が$\mathcal{S}$を包む最小の集合の環であることから$\rho(\mathcal{S}) = \mathcal{U}$となる．
+
+    $\mathcal{U}$が集合の環の性質(1), (2), (3)をみたすことを示す．$\varnothing \in \mathcal{S} \subseteq \mathcal{U}$であるから，$\mathcal{U}$は(1)をみたす．次に，$S = S_1 \cup \cdots \cup S_m$, $T = T_1 \cup \cdots \cup T_n \in \mathcal{U}$とおく．$\mathcal{U}$はその定義から互いに素な集合の和集合について閉じており，$S_i \cap T_j$, $i = 1, \cdots, m$, $j = 1, \cdots, n$は互いに素であるから
+    \begin{equation*}
+        S \cap T = (S_1 \cup \cdots \cup S_m) \cap (T_1 \cup \cdots \cup T_n) = \bigcup_{i = 1}^m \bigcup_{j = 1}^n (S_i \cap T_j) \in \mathcal{U}
+    \end{equation*}
+    となり，$\mathcal{U}$は共通部分について閉じている．$\mathcal{U}$が共通部分について閉じていることと，集合の半環の性質(3)より$S_i \setminus T_j \in \mathcal{U}$, $i = 1, \cdots m$, $j = 1, \cdots n$が成り立つことから
+    \begin{equation*}
+        S \setminus T = (S_1 \cup \cdots \cup S_m) \setminus (T_1 \cup \cdots \cup T_n) = \bigcup_{i = 1}^m \bigcap_{j = 1}^n (S_i \setminus T_j) \in \mathcal{U}
+    \end{equation*}
+    である．したがって，$\mathcal{U}$は(3)をみたす．$\mathcal{U}$は差集合，共通部分，互いに素な集合の和集合について閉じているので
+    \begin{equation*}
+        S \cup T = (S \setminus T) \cup (S \cap T) \cup (T \setminus S) \in \mathcal{U}
+    \end{equation*}
+    となり，$\mathcal{U}$は(2)をみたす．
+    \qed
+\end{proof}
+
+\begin{proposition}
+    $\mathcal{S}$を集合$X$上の集合の半環とし，$\mu:\mathcal{S} \to [0, \infty]$を$\mathcal{S}$上の前測度とする．このとき，$\mu$は集合の環$\rho(\mathcal{S})$上の前測度$\bar{\mu}:\rho(\mathcal{S}) \to [0, \infty]$に一意に拡張される．
+\end{proposition}
+
+集合$X$の冪集合$\mathcal{P}(X)$上で定義された関数$\mu^*: \mathcal{P}(X) \to [0, \infty]$が\emph{外測度}（outer measure）であるとは以下の性質をみたすことである．
+\begin{enumerate}
+    \item $\mu^*(\varnothing) = 0$
+    \item （単調性）$A \subseteq B$ならば$\mu^*(A) \leq \mu^*(B)$
+    \item （$\sigma$-劣加法性）$\mathcal{P}(X)$の元の列$(A_i)_{i = 1}^\infty$に対して，$\mu^*\left(\bigcup_{i = 1}^\infty A_i\right) \leq \sum_{i = 1}^\infty \mu^*(A_i)$
+\end{enumerate}
+
+\begin{proposition}\label{prop:tobemeasurable}
+    $X$を集合とし，$\mu^*$を$\mathcal{P}(X)$上の外測度とする．$X$の部分集合族$\mathcal{A}^*$を
+    \begin{equation*}
+        \mathcal{A}^* = \{A \subseteq X \mid \forall Q \subseteq X(\mu^*(Q) = \mu^*(Q \cap A) + \mu^*(Q \setminus A))\}
+    \end{equation*}
+    と定義すると，$\mathcal{A}^*$は$\sigma$-加法族となる．また，$\mu^*$の$\mathcal{A}^*$への制限$\mu^*|_{\mathcal{A}^*}:\mathcal{A}^* \to [0, \infty]$は$(X, \mathcal{A}^*)$上の測度となる．
+\end{proposition}
+
+命題\ref{prop:tobemeasurable}の$\sigma$-加法族$\mathcal{A}^*$の元$A \in \mathcal{A}^*$を$\mu^*$-\emph{可測集合}という．
+
+$\mathcal{G}$を集合$X$の部分集合族とする．$\mathcal{G}$の元の列$(G_i)_{i = 1}^\infty$が$X$の部分集合$A \in \mathcal{P}(X)$の$\mathcal{G}$-被覆であるとは，$A \subseteq \bigcup_{i = 1}^\infty G_i$が成り立つことをいう．$A \in \mathcal{P}(X)$の$\mathcal{G}$-被覆全体の集合を$\mathcal{C}(A)$とする．
+
+\begin{proposition}\label{prop:inducedoutermeasure}
+    $\mathcal{G}$を$\varnothing \in \mathcal{G}$であるような$X$の部分集合族とし，関数$\mu: \mathcal{G} \to [0, \infty]$を前測度とする\footnote{前測度でなくとも$\mu(\varnothing) = 0$でありさえすれば命題は成り立つが，前測度でない場合には関心がないため，$\mu$は前測度であると仮定する．}．このとき，関数$\mu^*:\mathcal{P}(X) \to [0, \infty]$を$A \in \mathcal{P}(X)$に対して
+    \begin{equation*}
+        \mu^*(A) = \inf \left\{\sum_{i = 1}^\infty \mu(S_i) \relmiddle| (S_i)_{i = 1}^\infty \in \mathcal{C}(A)\right\}
+    \end{equation*}
+    と定めると$\mu^*$は外測度となる．ただし$\inf \varnothing = \infty$とする．
+\end{proposition}
+
+\begin{proof}
+    $G_i = \varnothing, i \in \bm{N}$とすると$(G_i)_{i = 1}^\infty \in \mathcal{C}(\varnothing)$であるから，$\mu^*(\varnothing) \leq \sum_{i = 1}^\infty \mu(G_i) = 0$．$\mu^*(\varnothing) \geq 0$であるから$\mu^*(\varnothing) = 0$である．
+
+    $A \subseteq B$とすると$\mathcal{C}(B) \subseteq \mathcal{C}(A)$であるから
+    \begin{align*}
+        \mu^*(A)
+        &= \inf \left\{\sum_{i = 1}^\infty \mu(G_i) \relmiddle| (G_i)_{i = 1}^\infty \in \mathcal{C}(A)\right\} \\
+        &\leq \inf \left\{\sum_{i = 1}^\infty \mu(G_i) \relmiddle| (G_i)_{i = 1}^\infty \in \mathcal{C}(B)\right\} \\
+        &= \mu^*(B)
+    \end{align*}
+    である．よって$\mu^*$は単調性をみたす．
+
+    $A_i \in \mathcal{P}(X)$, $i \in \bm{N}$とする．$\mu^*(A_i) = \infty$となる$i \in \bm{N}$が存在するか，任意の$i \in \bm{N}$に対して$\mu^*(A_i) < \infty$であるが$\sum_{i = 1}^\infty \mu^*(A_i) = \infty$となる場合，$\mu^*(\bigcup_{i = 1}^\infty A_i) \leq \infty$より$\mu^*(\bigcup_{i = 1}^\infty A_i)$ $\leq$ $\sum_{i = 1}^\infty \mu^*(A_i)$となる．
+
+    任意の$i \in \bm{N}$に対して$\mu^*(A_i) < \infty$であり，$\sum_{i = 1}^\infty \mu^*(A_i) < \infty$であるとする．このとき，任意の$i \in \bm{N}$に対して$\mathcal{C}(A_i) \not= \varnothing$が成り立つ．下限の性質から，任意の$\varepsilon > 0$に対して
+    \begin{equation*}
+        \sum_{j = 1}^\infty \mu(G_{ij}) \leq \mu^*(A_i) + \frac{\varepsilon}{2i}
+    \end{equation*}
+    となるような被覆$(G_{ij})_{j = 1}^\infty \in \mathcal{C}(A_i)$が各$i \in \bm{N}$に対して存在する．両辺の$i$についての和をとると
+    \begin{equation*}
+        \sum_{i = 1}^\infty \sum_{j = 1}^\infty \mu(G_{ij}) \leq \sum_{i = 1}^\infty \mu^*(A_i) + \varepsilon
+    \end{equation*}
+    となるので，$\sum_{i = 1}^\infty \sum_{j = 1}^\infty \mu(G_{ij}) < \infty$である．よって，杉浦\cite{杉浦}定理5.4より
+    \begin{equation*}
+        \sum_{i, j = 1}^\infty \mu(G_{ij}) = \sum_{i = 1}^\infty \sum_{j = 1}^\infty \mu(G_{ij}) < \infty
+    \end{equation*}
+    である．すなわち，正項二重級数$\sum_{i, j = 1}^\infty \mu(G_{ij})$は収束するので，杉浦\cite{杉浦}定理5.5より，$\bm{N}$から$\bm{N} \times \bm{N}$への全単射$\phi$を一つとると，一列化$\sum_{k = 1}^\infty \mu(G_{\phi(k)})$は収束し，
+    \begin{equation*}
+        \sum_{k = 1}^\infty \mu(G_{\phi(k)}) = \sum_{i, j = 1}^\infty \mu(G_{ij})
+    \end{equation*}
+    である．$\mathcal{G}$の元の列$(G_{\phi(k)})_{k = 1}^\infty$は$\bigcup_{i = 1}^\infty A_i$の$\mathcal{G}$-被覆であるから\footnote{$x \in \bigcup_{i = 1}^\infty A_i$ならば$x \in A_i$となる$i \in \bm{N}$が存在する．$(G_{ij})_{j = 1}^\infty$は$A_i$の被覆であるから，$x \in G_{ij}$となる$j \in \bm{N}$が存在する．したがって，$x$ $\in G_{\phi(\phi^{-1}(i, j))}$ $\subseteq \bigcup_{k = 1}^\infty G_{\phi(k)}$である．}，$\mu^*$の定義より
+    \begin{align*}
+        \mu^*\left(\bigcup_{i = 1}^\infty A_i\right)
+        &= \sum_{k = 1}^\infty \mu(G_{\phi(k)}) \\
+        &\leq \sum_{i, j = 1}^\infty \mu(G_{ij}) \\
+        &= \sum_{i = 1}^\infty \sum_{j = 1}^\infty \mu(G_{ij}) \\
+        &\leq \sum_{i = 1}^\infty \mu^*(A_i) + \varepsilon
+    \end{align*}
+    である．$\varepsilon$は任意であったから，$\mu^*(\bigcup_{i = 1}^\infty A_i)$ $\leq$ $\sum_{i = 1}^\infty \mu^*(A_i)$となる．よって，$\mu^*$は$\sigma$-劣加法性をみたす．
+    \qed
+\end{proof}
+
+命題\ref{prop:inducedoutermeasure}の外測度$\mu^*$を，前測度$\mu$から\emph{誘導された}外測度という．
+
+\begin{proposition}\label{prop:extensionpowerset}
+    $\mathcal{S}$を集合$X$上の集合の半環とし，$\mu$を$\mathcal{S}$上の前測度とする．このとき，$\mu$から誘導された外測度$\mu^*$は$\mu$の$\mathcal{P}(X)$への拡張となっている．
+\end{proposition}
+
+\begin{proposition}\label{prop:semiringismeasurable}
+    $\mathcal{S}$を集合$X$上の集合の半環，$\mu$を$\mathcal{S}$上の前測度，$\mu^*$を$\mu$から誘導された外測度とする．このとき，$S \in \mathcal{S}$は$\mu^*$-可測集合である．
+\end{proposition}
+
+\begin{theorem}[Carath\'{e}odory]
+    $\mathcal{S}$を集合$X$上の集合の半環とし，$\mu$を$\mathcal{S}$上の前測度とする．このとき，$\mu$は$\sigma(\mathcal{S})$上の測度へ拡張することができる．さらに，$\mathcal{S}$の元の単調増加列$(S_i)_{i = 1}^\infty$で，$S_i \uparrow X$かつ任意の$i \in \bm{N}$について$\mu(S_i) < \infty$をみたすようなものが存在するならば，$\sigma(\mathcal{S})$への拡張は一意である．
+\end{theorem}
+
+\begin{proof}
+    （存在すること）$\mu$から誘導された外測度を$\mu^*$とし，$\mu^*$-可測集合全体の集合を$\mathcal{A}^*$とする．命題\ref{prop:semiringismeasurable}より$\mathcal{S} \subseteq \mathcal{A}^*$であり，命題\ref{prop:tobemeasurable}より$\mathcal{A}^*$は$\sigma$-加法族であるから，$\sigma(\mathcal{S}) \subseteq \sigma(\mathcal{A}^*) = \mathcal{A}^*$が成り立つ．再び命題\ref{prop:tobemeasurable}より，$\mu^*|_{\mathcal{A}^*}$は$\mathcal{A}^*$上の測度であるから，その$\sigma(\mathcal{S})$への制限$\mu^*|_{\sigma(\mathcal{S})}$は$\sigma(\mathcal{S})$上の測度である．定理\ref{prop:extensionpowerset}より，$\mu^*$は$\mu$の$\mathcal{P}(X)$への拡張になっているので，$\mu^*|_{\sigma(\mathcal{S})}$は$\mu$の$\sigma(\mathcal{S})$への拡張である．
+
+    （一意であること）$\mathcal{S}$の元の単調増加列$(S_i)_{i = 1}^\infty$で，$S_i \uparrow X$かつ任意の$i \in \bm{N}$について$\mu(S_i) < \infty$をみたすようなものが存在するならば，集合の半環$\mathcal{S}$は共通部分について閉じているので，Schilling\cite{Schilling}の定理5.7（測度の一意性定理）より，$\mu$の$\sigma(\mathcal{S})$への拡張は一意である．
+    \qed
+\end{proof}
+
+\begin{thebibliography}{99}
+\bibitem{Dudley}
+    R.M. Dudley,
+    \textit{Real analysis and probability} 2nd ed.,
+    Cambridge : Cambridge University Press , 2002.
+\bibitem{Schilling}
+    Ren\'{e} L. Schilling,
+    \textit{Measures, integrals and martingales},
+    Cambridge University Press, 2011.
+\bibitem{岩田}
+    岩田耕一郎
+    『ルベーグ積分 : 理論と計算手法』
+    森北出版, 2015.
+\bibitem{杉浦}
+    杉浦光夫
+     『解析入門』
+     東京大学出版会, 1980.
+\end{thebibliography}
+
+\end{document}
