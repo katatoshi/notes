@@ -1,0 +1,155 @@
+\documentclass[12pt,a4paper]{jsarticle}
+\usepackage{mymacro}
+
+\newcommand{\nat}{\mathbf{N}}
+\newcommand{\real}{\mathbf{R}}
+\newcommand{\frakI}{\mathfrak{I}}
+\newcommand{\frakJ}{\mathfrak{J}}
+\newcommand{\frakS}{\mathfrak{S}}
+\newcommand{\frakT}{\mathfrak{T}}
+
+\begin{document}
+
+\title{伊藤『ルベーグ積分入門』ノート}
+\author{katatoshi}
+\maketitle
+
+伊藤『ルベーグ積分入門』~\cite{伊藤}を読んでいてつまずいた点などをまとめる（随時追加）．記号・記法はできるだけテキストに合わせてある．
+
+\section{\S3の集合函数$\Psi$の加法性}
+
+\S3 例3において，集合函数$\Psi$が加法的であることが容易には分からなかったのでその辺りの証明をまとめる．
+
+$\real^N$の区間全体の集合$\frakI_N$と有界な区間全体の集合$\frakJ_N$を次のように定義する．
+\begin{gather*}
+    \frakI_N = \{(a_1, b_1] \times \dots \times (a_N, b_N] ; -\infty \leqq a_\nu < b_\nu \leqq +\infty\}, \\
+    \frakJ_N = \{(a_1, b_1] \times \dots \times (a_N, b_N] ; -\infty < a_\nu < b_\nu < +\infty\}.
+\end{gather*}
+ただし$-\infty \leqq a_\nu < +\infty$に対して$(a_\nu, +\infty] = (a_\nu, +\infty)$とする．
+
+\begin{proposition}\label{prop1}
+    $I = (a_1, b_1] \times \dots \times (a_N, b_N] \in \frakI_N$, $I_1, I_2 \in \frakI_N$, $I_1, I_2 \not= \varnothing$, $I_1 \cap I_2 = \varnothing$, $(b_1, \cdots, b_N) \in I_2$とする．このとき$I = I_1 + I_2$であるための必要十分条件は
+    \begin{gather*}
+    I_1 = (a_1, b_1] \times \dots (a_{\nu_0}, c] \times \dots \times (a_N, b_N], \\
+    I_2 = (a_1, b_1] \times \dots (c, b_{\nu_0}] \times \dots \times (a_N, b_N]
+    \end{gather*}
+    となるような$\nu_0$と$a_{\nu_0} < c < b_{\nu_0}$が存在することである．\footnote{互いに素な集合$I_1$, $I_2$, $I_1 \cap I_2 = \varnothing$に対して$I_1 + I_2$で$I_1$と$I_2$の非交和を表す．}
+\end{proposition}
+\begin{proof}
+    十分条件は簡単なので省略する．
+
+    必要条件を示す．$(b_1, \cdots, b_N) \in I_2$より$I_2 = (c_1, b_1] \times \dots \times (c_N, b_N]$ $(a_\nu < b_\nu)$とかける．$I_1 \not= \varnothing$であるから$a_\nu < c_\nu$であるような$\nu$が少なくとも1つ存在するが，逆にそのような$\nu$は唯一つである．実際，$a_{\nu_1} < c_{\nu_1}$, $a_{\nu_2} < c_{\nu_2}$ $(\nu_1 < \nu_2)$とすると$a_{\nu_i} < y_{\nu_i} < c_{\nu_i}$ $(i = 1, 2)$であるような$y_{\nu_i}$ $(i = 1, 2)$がとれる．$z_i = (x_1, \cdots, \stackrel{\nu_i}{\stackrel{\vee}{y_{\nu_i}}}, \cdots, x_N )$ $(c_\nu < x_\nu < b_\nu)$とすると$z_i \in I$, $z_i \not \in I_2$であるから$z_i \in I \setminus I_2 = I_1$である．$I_1 = (s_1, t_1] \times \cdots \times (s_N, t_N]$ $(a_\nu \leqq s_\nu < t_\nu \leqq b_\nu)$とすると$z_i \in I_1$であるから$s_\nu < x_\nu \leqq t_\nu$である．そこで$z = (x_1, \cdots, \stackrel{\nu_1}{\stackrel{\vee}{t_{\nu_1}}}, \cdots, \stackrel{\nu_2}{\stackrel{\vee}{t_{\nu_2}}}, \cdots, x_N)$とすると$z \in I_1$である．一方で$c_\nu < t_\nu$であるから$z \in I_2$である．これは$I_1 \cap I_2 = \varnothing$に矛盾する．したがって$a_{\nu_0} < c_{\nu_0}$とすると$c_\nu = a_\nu$ $(\nu \not= \nu_0)$であるから$I_2 = (a_1, b_1] \times \dots (c_{\nu_0}, b_{\nu_0}] \times \dots \times (a_N, b_N]$である．よって$I_1 = I \setminus I_2$より$I_1 = (a_1, b_1] \times \dots (a_{\nu_0}, c_{\nu_0}] \times \dots \times (a_N, b_N]$である．
+    \qed
+\end{proof}
+
+$f_\nu: \real \to \real$ $(\nu = 1, \cdots, N)$を定数函数でない単調増加函数とする．集合函数$\Phi: \frakJ_N \to \real$, $\Psi: \frakI_N \to \real$を次のように定義する．$J = (a_1, b_1] \times \cdots \times (a_N, b_N] \in \frakJ_N$に対して
+\begin{equation*}
+    \Phi(J) = \prod_{\nu = 1}^N (f_\nu(b_\nu) - f_\nu(a_\nu))
+\end{equation*}
+と定義し，$I \in \frakI_N$に対して
+\begin{equation*}
+    \Psi(I) = \sup\{\Phi(J) ; J \in \frakJ_N, J \subset I\}
+\end{equation*}
+と定義する．
+
+\begin{proposition}\label{prop2}
+    $\Phi$, $\Psi$について以下の性質が成り立つ．
+    \begin{enumerate}
+        \item $J \in \frakJ_N$ならば$\Phi(J) = \Psi(J)$.
+        \item $I_1, I_2 \in \frakI_N$, $I_1 \subset I_2$ならば$\Psi(I_1) \leqq \Psi(I_2)$.
+        \item $J, J_1, J_2 \in \frakJ_N$, $J_1 \cap J_2 = \varnothing$, $J = J_1 + J_2$ならば$\Phi(J) = \Phi(J_1) + \Phi(J_2)$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    (1) $J = (a_1, b_1] \times \cdots \times (a_N, b_N]$とする．$J' = (a'_1, b'_1] \times \cdots \times (a'_N, b'_N] \in \frakJ_N$, $J' \subset J$とすると$a_\nu \leqq a'_\nu < b'_\nu \leqq b_\nu$であり$f_\nu$は単調増加であるから$f_\nu(a_\nu) \leqq f_\nu(a'_\nu) \leqq f_\nu(b'_\nu) \leqq f_\nu(b_\nu)$である．よって
+    \begin{align*}
+        \Phi(J')
+        &= \prod_{\nu = 1}^N (f_\nu(b'_\nu) - f_\nu(a'_\nu)) \\
+        &\leqq \prod_{\nu = 1}^N (f_\nu(b_\nu) - f_\nu(a_\nu)) \\
+        &= \Phi(J)
+    \end{align*}
+    であるから
+    \begin{align*}
+        \Phi(J)
+        &= \max\{\Phi(J') ; J' \in \frakJ_N, J' \subset J\} \\
+        &= \sup\{\Phi(J') ; J' \in \frakJ_N, J' \subset J\} \\
+        &= \Psi(J).
+    \end{align*}
+    (2) $\{\Phi(J) ; J \in \frakJ_N, J \subset I_1\} \subset \{\Phi(J) ; J \in \frakJ_N, J \subset I_2\}$であるから
+    \begin{align*}
+        \Psi(I_1)
+        &= \sup\{\Phi(J) ; J \in \frakJ_N, J \subset I_1\} \\
+        &\leqq \sup\{\Phi(J) ; J \in \frakJ_N, J \subset I_2\} \\
+        &= \Psi(I_2).
+    \end{align*}
+    (3) $J = (a_1, b_1] \times \cdots \times (a_N, b_N]$とし，$(b_1, \cdots, b_N) \in J_2$とする（$(b_1, \cdots, b_N) \in J_1$なら$J_1$と$J_2$の名前を付け替えればよい）．命題\ref{prop1}より
+    \begin{gather*}
+    I_1 = (a_1, b_1] \times \dots (a_{\nu_0}, c] \times \dots \times (a_N, b_N], \\
+    I_2 = (a_1, b_1] \times \dots (c, b_{\nu_0}] \times \dots \times (a_N, b_N]
+    \end{gather*}
+    となるような$\nu_0$と$a_{\nu_0} < c < b_{\nu_0}$が存在する．よって
+    \begin{align*}
+        \Phi(J)
+        &= \prod_{\nu = 1}^N (f_\nu(b_\nu) - f_\nu(a_\nu)) \\
+        &= \prod_{\nu \not= \nu_0} (f_\nu(b_\nu) - f_\nu(a_\nu)) (f_{\nu_0}(b_{\nu_0}) - f_{\nu_0}(a_{\nu_0})) \\
+        &= \prod_{\nu \not= \nu_0} (f_\nu(b_\nu) - f_\nu(a_\nu)) ((f_{\nu_0}(c) - f_{\nu_0}(a_{\nu_0})) + (f_{\nu_0}(b_{\nu_0}) - f_{\nu_0}(c))) \\
+        &= \prod_{\nu \not= \nu_0} (f_\nu(b_\nu) - f_\nu(a_\nu)) (f_{\nu_0}(c) - f_{\nu_0}(a_{\nu_0})) + \prod_{\nu \not= \nu_0} (f_\nu(b_\nu) - f_\nu(a_\nu)) (f_{\nu_0}(b_{\nu_0}) - f_{\nu_0}(c)) \\
+        &= \Phi(J_1) + \Phi(J_2).
+    \end{align*}
+    \qed
+\end{proof}
+
+\begin{lemma}\label{lemma1}
+    $\frakS, \frakT$を集合族とし，$f: \frakS \to \real$, $g: \frakT \to \real$とするとき
+    \begin{equation*}
+        \sup\{f(S) ; S \in \frakS\} + \sup\{g(T) ; T \in \frakT\} = \sup\{f(S) + f(T) ; S \in \frakS, T \in \frakT\}.
+    \end{equation*}
+\end{lemma}
+\begin{proof}
+    $\alpha = \sup\{f(S) ; S \in \frakS\}$, $\beta = \sup\{g(T) ; T \in \frakT\}$, $\gamma = \sup\{f(S) + f(T) ; S \in \frakS, T \in \frakT\}$とする．任意の$S \in \frakS$, $T \in \frakT$に対して$f(S) \leqq \alpha$, $g(T) \leqq \beta$であるから$f(S) + g(T) \leqq \alpha + \beta$である．よって$\gamma \leqq \alpha + \beta$．逆に，任意の$S \in \frakS$, $T \in \frakT$に対して$f(S) + g(T) \leqq \gamma$であるから$\alpha \leqq \gamma - g(T)$である．よって$\beta \leqq \gamma - \alpha$，すなわち$\alpha + \beta \leqq \gamma$.
+    \qed
+\end{proof}
+
+\begin{proposition}
+    $I, I_1, I_2 \in \frakI_N$, $I_1 \cap I_2 = \varnothing$, $I = I_1 + I_2$ならば
+    \begin{equation*}
+        \Psi(I) = \Psi(I_1) + \Psi(I_2)
+    \end{equation*}
+    である．すなわち$\Psi$は加法的である．
+\end{proposition}
+\begin{proof}
+    まず$\Psi(I) \leqq \Psi(I_1) + \Psi(I_2)$であることを示す．$J \in \frakJ_N$, $J \subset I$とし$J_i = J \cap I_i$ $(i = 1, 2)$とする．このとき$J = J_1 + J_2$である．実際，$x \in J$ならば$x \in I = I_1 + I_2$であるから$x \in I_1$または$x \in I_2$である．したがって$x \in J \cap I_1 = J_1$または$x \in J_2 = J \cap I_2 = J_2$である．よって$J \subset J_1 + J_2$．逆に$x \in J_1 + J_2$ならば$x \in J_1 \subset J$または$x \in J_2 \subset J$であるから$J_1 + J_2 \subset J$．$J_i \in \frakJ_N$, $J_i \subset I_i$であるから$\Psi(I_i)$の定義より$\Phi(J_i) \leqq \Psi(I_i)$である．したがって命題\ref{prop2}~(3)より
+    \begin{equation*}
+        \Phi(J) = \Phi(J_1) + \Phi(J_2) \leqq \Psi(I_1) + \Psi(I_2)
+    \end{equation*}
+    である．よって$\Psi(I_1) + \Psi(I_2)$は$\{\Phi(J) ; J \in \frakJ_N, J \subset I\}$の上界であるから
+    \begin{equation*}
+        \Psi(I) = \sup\{\Phi(J) ; J \in \frakJ_N, J \subset I\} \leqq \Psi(I_1) + \Psi(I_2).
+    \end{equation*}
+
+    次に$\Psi(I_1) + \Psi(I_2) \leqq \Psi(I)$であることを示す．$J_i = (c_{i 1}, d_{i 1}] \times \cdots \times (c_{i N}, d_{i N}] \in \frakJ_N$, $J_i \subset I_i$ $(i = 1, 2)$とする．$c_\nu = \min\{c_{1 \nu}, c_{2 \nu}\}$, $d_\nu = \max\{d_{1 \nu}, d_{2 \nu}\}$, $J = (c_1, d_1] \times \cdots \times (c_N, d_N]$とすると$J \subset I$である．実際，$I = (a_1, b_1] \times \cdots \times (a_N, b_N]$とすると$J_i \subset I$であるから$a_\nu \leqq c_{i \nu} < d_{i \nu} \leqq b_\nu$である．よって$a_\nu \leqq c_\nu < d_\nu \leqq b_\nu$である．よって命題\ref{prop2}~(2)より$\Psi(J) \leqq \Psi(I)$であり，$J \in \frakJ_N$であるから命題\ref{prop2}~(1)より$\Phi(J) \leqq \Psi(I)$である．$K_i = J \cap I_i$とすると$K_i \in \frakJ_N$, $J_i \subset K_i$, $J = K_1 + K_2$であるから命題\ref{prop2}より
+    \begin{equation*}
+        \Phi(J_1) + \Phi(J_2) \leqq \Phi(K_1) + \Phi(K_2) = \Phi(J)
+    \end{equation*}
+    である．したがって$\Psi(I)$は$\{\Phi(J_1) + \Phi(J_2) ; J_i \in \frakJ_N, J_i \subset I_i\}$の上界であるから
+    \begin{equation*}
+        \sup\{\Phi(J_1) + \Phi(J_2) ; J_i \in \frakJ_N, J_i \subset I_i\} \leqq \Psi(I)
+    \end{equation*}
+    である．よって補題\ref{lemma1}より
+    \begin{align*}
+        \Psi(I_1) + \Psi(I_2)
+        &= \sup\{\Phi(J_1) ; J_1 \in \frakJ_N, J_1 \subset I_1\} + \sup\{\Phi(J_2) ; J_2 \in \frakJ_N, J_2 \subset I_2\} \\
+        &= \sup\{\Phi(J_1) + \Phi(J_2) ; J_i \in \frakJ_N, J_i \subset I_i\} \\
+        &\leqq \Psi(I).
+    \end{align*}
+    \qed
+\end{proof}
+
+\begin{thebibliography}{99}
+\bibitem{伊藤}
+    伊藤清三郎
+    『ルベーグ積分入門』
+    裳華房, 1963.
+\end{thebibliography}
+
+\end{document}
