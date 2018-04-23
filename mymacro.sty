@@ -1,0 +1,50 @@
+% パッケージ
+\usepackage{comment}
+\usepackage{amsmath, amssymb}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage[dvipdfmx,hiresbb]{graphicx}
+\usepackage{layout}
+
+% 定理環境
+\newtheorem{axiom}{公理}
+\newtheorem{definition}{定義}
+\newtheorem{theorem}{定理}
+\newtheorem{proposition}{命題}
+\newtheorem{lemma}{補題}
+\newtheorem{corollary}{系}
+\newtheorem{example}{例}
+
+% 節ごとに番号をつける場合
+\newtheorem{axioms}{公理}[section]
+\newtheorem{definitions}{定義}[section]
+\newtheorem{theorems}{定理}[section]
+\newtheorem{propositions}{命題}[section]
+\newtheorem{lemmas}{補題}[section]
+\newtheorem{corollarys}{系}[section]
+\newtheorem{examples}{例}[section]
+
+% 証明環境．最後に \qed をつけること
+\newtheorem{proof}{証明}
+\renewcommand{\theproof}{} % proof 環境に対するカウンタ値を「空」に設定し，proof 環境に対して番号を振らないようにする
+
+% マクロ
+\newcommand{\maxl}{\mathop{\rm max}\limits}
+\newcommand{\minl}{\mathop{\rm min}\limits}
+\newcommand{\argmax}{\mathop{\rm arg~max}}
+\newcommand{\argmin}{\mathop{\rm arg~min}}
+\newcommand{\argmaxl}{\mathop{\rm arg~max}\limits}
+\newcommand{\argminl}{\mathop{\rm arg~min}\limits}
+\newcommand{\argmaxsf}{\mathop{\sf arg~max}}
+\newcommand{\argminsf}{\mathop{\sf arg~min}}
+\newcommand{\argmaxlsf}{\mathop{\sf arg~max}\limits}
+\newcommand{\argminlsf}{\mathop{\sf arg~min}\limits}
+\newcommand{\plim}{\stackrel{p}{\to}}
+\newcommand{\qed}{\hfill$\blacksquare$\par}
+
+\renewcommand\thefootnote{\arabic{footnote}} % 脚注の番号の形式
+
+\def\labelenumi{(\theenumi)} % レベル 1 の enumerate 環境で (1), (2), ... のように表示する
+
+\newcommand{\relmiddle}[1]{\mathrel{}\middle#1\mathrel{}} % 「\middle な \mid」- http://d.hatena.ne.jp/zrbabbler/20120411/1334151482
+
