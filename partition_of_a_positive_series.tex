@@ -17,7 +17,23 @@ $P \subseteq \nat$に対して，$P$の有限部分集合全体の集合を$\cal
 \end{equation*}
 を正項級数$\sum_{n \in P} a_n$の和と呼び，同じく$\sum_{n \in P} a_n$で表わす．$\sup_{F \in \calF(P)} s_F < +\infty$であるとき正項級数$\sum_{n \in P} a_n$は収束するという．
 
-\begin{proposition}\label{main_prop}
+この正項級数の和の定義は，部分和の極限として定義する一般的な和の定義と一致する．
+
+\begin{proposition}
+    任意の$n \in \nat$に対して$a_n \geq 0$であるような数列$(a_n)_{n \in \nat}$について
+    \begin{equation*}
+        \sum_{n \in \nat} a_n = \lim_{m \to \infty} \sum_{n = 1}^m a_n
+    \end{equation*}
+    である．
+\end{proposition}
+\begin{proof}
+    $s = \sum_{n \in \nat} a_n$, $t = \lim_{m \to \infty} \sum_{n = 1}^m a_n$とする．$t_m = \sum_{n = 1}^m a_n$, $m \in \nat$とすると$(t_m)_{m \in \nat}$は単調増加列であるから$t = \sup_{m \in \nat} t_m$である．いま，$F$を$\calF(\nat)$の任意の元とすると，$s_F \leq t_{\max F} \leq t$であるから$s = \sup_{F \in \calF(\nat)} s_F \leq t$である．逆に，任意の$m \in \nat$に対して$F = \{1, \cdots, m\}$とすると$F \in \calF(\nat)$であるから$t_m = s_F \leq s$である．したがって$t = \sup_{m \in \nat} t_m \leq s$である．
+    \qed
+\end{proof}
+
+正項級数の和は，和をとる範囲を分割して計算することができる．
+
+\begin{proposition}\label{base_prop}
     $P, P_1, P_2 \subseteq \nat$, $P \not= \varnothing$, $P_1 \not= \varnothing$, $P_2 \not= \varnothing$, $P_1 \cap P_2 = \varnothing$, $P_1 \cup P_2 = P$とする．このとき正項級数$\sum_{n \in P} a_n$が収束するための必要十分条件は$\sum_{n \in P_1} a_n$と$\sum_{n \in P_2} a_n$が共に収束することである．そしてこの条件が成り立つとき
     \begin{equation*}
         \sum_{n \in P} a_n = \sum_{n \in P_1} a_n + \sum_{n \in P_2} a_n
@@ -27,17 +43,17 @@ $P \subseteq \nat$に対して，$P$の有限部分集合全体の集合を$\cal
 \begin{proof}
     （必要性）$F_1$を$\calF(P_1)$の任意の元，$F_2$を$\calF(P_2)$の任意の元とする．$F_1 \cup F_2 \in \calF(P)$より$s_{F_1} + s_{F_2} = s_{F_1 \cup F_2} \leq \sup_{F \in \calF(P)} s_F$であるから
     \begin{equation}
-        \sum_{n \in P_1} a_n + \sum_{n \in P_2} a_n = \sup_{F_1 \in \calF(P_1)} s_{F_1} + \sup_{F_2 \in \calF(P_2)} s_{F_2} \leq \sup_{F \in \calF(P)} s_F = \sum_{n \in P} a_n \label{main_prop:ineq_suff}
+        \sum_{n \in P_1} a_n + \sum_{n \in P_2} a_n = \sup_{F_1 \in \calF(P_1)} s_{F_1} + \sup_{F_2 \in \calF(P_2)} s_{F_2} \leq \sup_{F \in \calF(P)} s_F = \sum_{n \in P} a_n \label{base_prop:ineq_suff}
     \end{equation}
     である．$\sum_{n \in P} a_n$は収束するので$\sum_{n \in P_1} a_n + \sum_{n \in P_2} a_n \leq \sum_{n \in P} a_n < +\infty$である．したがって$\sum_{n \in P_1} a_n$, $\sum_{n \in P_2} a_n$は収束する．
 
     （十分性）任意の$F \in \calF(P)$は$F = F_1 \cup F_2$, $F_1 \in \calF(P_1)$, $F_2 \in \calF(P_2)$と表わされるので$s_F = s_{F_1} + s_{F_2} \leq \sup_{F_1 \in \calF(P_1)} s_{F_1} + \sup_{F_2 \in \calF(P_2)} s_{F_2}$である．したがって
     \begin{equation}
-        \sum_{n \in P} a_n = \sup_{F \in \calF(P)} s_F \leq \sup_{F_1 \in \calF(P_1)} s_{F_1} + \sup_{F_2 \in \calF(P_2)} s_{F_2} = \sum_{n \in P_1} a_n + \sum_{n \in P_2} a_n \label{main_prop:ineq_ness}
+        \sum_{n \in P} a_n = \sup_{F \in \calF(P)} s_F \leq \sup_{F_1 \in \calF(P_1)} s_{F_1} + \sup_{F_2 \in \calF(P_2)} s_{F_2} = \sum_{n \in P_1} a_n + \sum_{n \in P_2} a_n \label{base_prop:ineq_ness}
     \end{equation}
     である．$\sum_{n \in P_1} a_n$, $\sum_{n \in P_2} a_n$は収束するので$\sum_{n \in P} a_n \leq \sum_{n \in P_1} a_n + \sum_{n \in P_2} a_n < +\infty$である．したがって$\sum_{n \in P} a_n$は収束する．
 
-    (\ref{main_prop:ineq_suff})，(\ref{main_prop:ineq_ness})より
+    (\ref{base_prop:ineq_suff})，(\ref{base_prop:ineq_ness})より
     \begin{equation*}
         \sum_{n \in P} a_n = \sum_{n \in P_1} a_n + \sum_{n \in P_2} a_n
     \end{equation*}
@@ -45,24 +61,26 @@ $P \subseteq \nat$に対して，$P$の有限部分集合全体の集合を$\cal
     \qed
 \end{proof}
 
-\begin{corollary}
+\begin{corollary}\label{general_prop}
     $P \subseteq \nat$, $P_l \subseteq \nat$, $l = 1, \cdots, L, L \geq 2$, $P \not= \varnothing$, $P_l \not= \varnothing$, $l = 1, \cdots, L$, $P_l \cap P_{l'} = \varnothing$, $l \not= l'$, $P = \bigcup_{l = 1}^L P_l$とする．このとき正項級数$\sum_{n \in P} a_n$が収束するための必要十分条件は任意の$l$, $l = 1, \cdots, L$に対して$\sum_{n \in P_l} a_n$が収束することである．そしてこの条件が成り立つとき
-    \begin{equation*}
-        \sum_{n \in P} a_n = \sum_{l = 1}^L \sum_{n \in P_l} a_n
-    \end{equation*}
+    \begin{equation}
+        \sum_{n \in P} a_n = \sum_{l = 1}^L \sum_{n \in P_l} a_n \label{general_prop:eq}
+    \end{equation}
     である．
 \end{corollary}
 \begin{proof}
-    $L$についての数学的帰納法で証明する．$L = 2$ならば命題\ref{main_prop}より主張は正しい．
+    $L$についての数学的帰納法で証明する．$L = 2$ならば命題\ref{base_prop}より主張は正しい．
 
-    $L > 2$とし，$L - 1$に対しては主張は正しいと仮定する．$Q = P_1 \cup \cdots \cup P_{L - 1}$とすると，$Q \not= \varnothing$, $Q \cap P_L = \varnothing$, $Q \cup P_L = P$である．いま，$\sum_{n \in P} a_n$が収束するならば，命題\ref{main_prop}より$\sum_{n \in Q} a_n$と$\sum_{n \in P_L} a_n$は共に収束する．したがって，帰納法の仮定より，任意の$l$, $l = 1, \cdots, L$に対して$\sum_{n \in P_l} a_n$は収束する．逆に，任意の$l$, $l = 1, \cdots, L$に対して$\sum_{n \in P_l} a_n$が収束するならば，帰納法の仮定より，$\sum_{n \in Q} a_n$は収束するので，命題\ref{main_prop}より$\sum_{n \in P} a_n$は収束する．
+    $L > 2$とし，$L - 1$に対しては主張は正しいと仮定する．$Q = P_1 \cup \cdots \cup P_{L - 1}$とすると，$Q \not= \varnothing$, $Q \cap P_L = \varnothing$, $Q \cup P_L = P$である．いま，$\sum_{n \in P} a_n$が収束するならば，命題\ref{base_prop}より$\sum_{n \in Q} a_n$と$\sum_{n \in P_L} a_n$は共に収束する．したがって，帰納法の仮定より，任意の$l$, $l = 1, \cdots, L$に対して$\sum_{n \in P_l} a_n$は収束する．逆に，任意の$l$, $l = 1, \cdots, L$に対して$\sum_{n \in P_l} a_n$が収束するならば，帰納法の仮定より，$\sum_{n \in Q} a_n$は収束するので，命題\ref{base_prop}より$\sum_{n \in P} a_n$は収束する．
 
-    命題\ref{main_prop}より$\sum_{n \in P} a_n = \sum_{n \in Q} a_n + \sum_{n \in P_L} a_n$であり，帰納法の仮定より$\sum_{n \in Q} a_n = \sum_{l = 1}^{L - 1} \sum_{n \in P_l} a_n$であるから
+    命題\ref{base_prop}より$\sum_{n \in P} a_n = \sum_{n \in Q} a_n + \sum_{n \in P_L} a_n$であり，帰納法の仮定より$\sum_{n \in Q} a_n = \sum_{l = 1}^{L - 1} \sum_{n \in P_l} a_n$であるから
     \begin{equation*}
         \sum_{n \in P} a_n = \sum_{l = 1}^{L - 1} \sum_{n \in P_l} a_n + \sum_{n \in P_L} a_n = \sum_{l = 1}^L \sum_{n \in P_l} a_n
     \end{equation*}
     である．
     \qed
 \end{proof}
+
+系\ref{general_prop}の対偶をとれば，$\sum_{n \in P} a_n$が$+\infty$に発散することと，少なくとも一つの$l$, $l = 1, \cdots, L$が存在して$\sum_{n \in P_l} a_n$が$+\infty$に発散することは同値であり，このとき式(\ref{general_prop:eq})の両辺は$+\infty$となるので，式(\ref{general_prop:eq})は級数の収束・発散に関わらず成り立つことになる．
 
 \end{document}
