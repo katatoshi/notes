@@ -1,0 +1,90 @@
+\documentclass[12pt,a4paper]{jsarticle}
+\usepackage{mymacro}
+
+\newcommand{\nat}{\mathbf{N}}
+\newcommand{\real}{\mathbf{R}}
+\newcommand{\calI}{\mathcal{I}}
+
+\begin{document}
+
+\title{Stieltjes測度について}
+\author{katatoshi}
+\maketitle
+
+$\calI = \{[a, b) \mid a \leq b\}$とする．ただし$a = b$ならば$[a, b) = \varnothing$である．
+\begin{proposition}
+    $F\colon \real \to \real$を単調増加な左連続関数とする．このとき
+    \begin{equation*}
+        \mu([a, b)) = F(b) - F(a)
+    \end{equation*}
+    とすれば$\mu$は$\calI$上の前測度である．
+\end{proposition}
+\begin{proof}
+    $\mu([0, 0)) = 0$であるから$\mu(\varnothing) = 0$は成り立つ．以下$\sigma$-加法性を有限加法性，有限劣加法性，$\sigma$-加法性の順番で証明する．
+
+    （有限加法性）$I_i = [a_i, b_i)$, $a_i < b_i$ $(i = 1, \cdots, n)$, $i \not= j \Rightarrow I_i \cap I_j = \varnothing$, $\bigsqcup_{i = 1}^n I_i \in \calI$とする．このとき適当に順番を変えることによって$b_i = a_{i + 1}$ $(i = 1, \cdots, n - 1)$とできるので
+    \begin{align*}
+        \sum_{i = 1}^n \mu(I_i)
+        &= \sum_{i = 1}^n (F(b_i) - F(a_i)) \\
+        &= \sum_{i = 1}^{n - 1} (F(a_{i + 1}) - F(a_i)) + F(b_n) - F(a_n) \\
+        &= F(b_n) - F(a_1) \\
+        &= \mu([a_1, b_n)) \\
+        &= \mu\left(\bigsqcup_{i = 1}^n I_i\right)
+    \end{align*}
+    が成り立つ．よって有限加法性をみたす．
+
+    （有限劣加法性）$I_i = [a_i, b_i)$, $a_i < b_i$ $(i = 1, \cdots, n)$, $I = [a, b)$ $(a < b)$, $I \subseteq \bigcup_{i = 1}^n I_i$とする．このとき$\mu(I) \leq \sum_{i = 1}^n \mu(I_i)$が成り立つことを示す．
+
+    $n$に関する数学的帰納法で証明する．$n = 1$のとき$a_1 \leq a < b \leq b_1$であり$F$が単調増加関数であるから
+    \begin{equation*}
+        \mu(I) = F(b) - F(a) \leq F(b_1) - F(a_1) = \mu(I_1)
+    \end{equation*}
+    が成り立つので主張は正しい．
+
+    $n \geq 1$について主張は正しいと仮定し$n + 1$についても主張が正しいことを示す．このとき$a \in [a_{i_0}, b_{i_0})$であるような$i_0$が存在する．$b \leq b_{i_0}$ならば$I \subseteq I_{i_0}$であるから$n = 1$のときと同様にして$\mu(I) \leq \mu(I_{i_0}) \leq \sum_{i = 1}^{n + 1} \mu(I_i)$が成り立つ．$b_{i_0} < b$ならば$[a, b)$を$[a, b_{i_0})$と$[b_{i_0}, b)$に分割すれば$[b_{i_0}, b)$は$I_{i_0}$以外の$n$個の区間で覆うことができるから帰納法の仮定と有限加法性より
+    \begin{equation*}
+        \mu(I) = \mu([a, b_{i_0})) + \mu([b_{i_0}, b)) \leq \mu(I_{i_0}) + \sum_{i \not= i_0} \mu(I_i) = \sum_{i = 1}^{n + 1} \mu(I_i)
+    \end{equation*}
+    である．よって主張は正しい．
+
+    （$\sigma$-加法性）$I_i = [a_i, b_i)$, $a_i < b_i$ $(i \in \nat)$, $\bigsqcup_{i \in \nat} I_i = [a, b)$とする．$F$は単調増加な左連続関数であるから任意の$\varepsilon > 0$に対して$\delta > 0$が存在して$F(b) - F(b - \delta) \leq \varepsilon$すなわち$\mu([a, b)) \leq \varepsilon + \mu([a, b - \varepsilon))$が成り立つ．同様に各$i \in \nat$について$\delta_i > 0$が存在して$F(a_i) - F(a_i - \delta_i) \leq 2^{-i}\varepsilon$すなわち$\mu([a_i - \delta_i, b_i)) \leq 2^{-i}\varepsilon + \mu([a_i, b_i))$が成り立つ．$[a, b - \varepsilon] \subseteq \bigcup_{i \in \nat} (a_i - \delta_i, b_i)$であるから$(a_i - \delta_i, b_i)$ $(i \in \nat)$はコンパクト集合$[a, b - \varepsilon]$の開被覆である．したがって有限集合$A \subseteq \nat$が存在して$[a, b - \varepsilon] \subseteq \bigcup_{i \in A} (a_i - \delta_i, b_i)$が成り立つ．したがって$[a, b - \varepsilon) \subseteq \bigcup_{i \in A} [a_i - \delta_i, b_i)$であるから有限劣加法性より
+    \begin{equation*}
+        \mu([a, b - \varepsilon)) \leq \sum_{i \in A} \mu([a_i - \delta_i, b_i))
+    \end{equation*}
+    である．したがって
+    \begin{align*}
+        \mu([a, b)) - \varepsilon 
+        &\leq \sum_{i \in A} (2^{-i}\varepsilon + \mu([a_i, b_i)) \\
+        &\leq \sum_{i \in \nat} (2^{-i}\varepsilon + \mu([a_i, b_i)) \\
+        &= \varepsilon + \sum_{i \in \nat} \mu([a_i, b_i))
+    \end{align*}
+    すなわち$\mu(I) \leq 2\varepsilon + \sum_{i \in \nat} \mu(I_i)$が成り立つ，よって$\varepsilon$は任意であったから$\mu(I) \leq \sum_{i \in \nat} \mu(I_i)$である．
+
+    逆向きの不等式を証明する．任意の$n \in \nat$について$I_1, \cdots, I_n$を$a_i$の小さい順に並び替えたものを$J_i = [c_i, d_i)$ $(i = 1, \cdots, n)$とすると$a \leq c_1 < d_1 \leq c_2 < d_2 \leq \cdots \leq c_{n - 1} < d_{n - 1} \leq c_n < d_n \leq b$であるから$F$の単調増加性より
+    \begin{align*}
+        \sum_{i = 1}^n \mu(I_i)
+        &= \sum_{i = 1}^n \mu(J_i) \\
+        &= (F(d_1) - F(c_1)) + (F(d_2) - F(c_2)) \\
+        &\qquad + \cdots + (F(d_{n - 1}) - F(c_{n - 1})) + (F(d_n) - F(c_n)) \\
+        &= (F(d_n) - F(c_1)) \\
+        &\qquad - (F(c_2) - F(d_1)) - \cdots - (F(c_n) - F(d_{n - 1})) \\
+        &\leq F(d_n) - F(c_1) \\
+        &\leq F(b) - F(a) \\
+        &= \mu(I)
+    \end{align*}
+    が成り立つ．よって$n$は任意であったから$\sum_{i \in \nat} \mu(I_i) \leq \mu(I)$である．
+    \qed
+\end{proof}
+
+\begin{thebibliography}{99}
+\bibitem{Dudley}
+    R.M. Dudley,
+    \textit{Real analysis and probability} 2nd ed.,
+    Cambridge : Cambridge University Press , 2002.
+\bibitem{Schilling}
+    René L. Schilling,
+    \textit{Measures, integrals and martingales} 2nd ed.,
+    Cambridge : Cambridge University Press , 2017.
+\end{thebibliography}
+
+\end{document}
